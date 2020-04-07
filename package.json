@@ -1,0 +1,20 @@
+{
+  "name": "budget-tracker",
+  "version": "1.0.0",
+  "description": "budger tracker homework",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarahsalvini/Budget-Tracker.git"
+  },
+  "author": "Sarah Salvini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarahsalvini/Budget-Tracker/issues"
+  },
+  "homepage": "https://github.com/sarahsalvini/Budget-Tracker#readme"
+}
