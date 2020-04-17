@@ -26,6 +26,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/budget-tracker-
 
 // routes here
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(`App running on port ${port}!`);
 });
