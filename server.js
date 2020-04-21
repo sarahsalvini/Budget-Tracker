@@ -25,6 +25,7 @@ mongoose.connect("mongodb://localhost/budget", {
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/budget-tracker-pwa-week18');
 
 // routes here
+app.use(require("./routes/api.js"));
 
 app.listen(port, () => {
   console.log(`App running on port ${port}!`);
