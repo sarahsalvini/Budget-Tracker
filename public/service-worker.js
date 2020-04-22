@@ -1,16 +1,7 @@
-const FILES_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/manifest.webmanifest",
-  "/style.css",
-  "/db.js",
-  "/index.js",
-  "icons/budget.png",
-];
+const FILES_TO_CACHE = ["/", "/index.html", "index.js", "/db.js", "/style.css"];
 
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
-
 
 self.addEventListener("install", function (evt) {
   evt.waitUntil(
@@ -22,7 +13,6 @@ self.addEventListener("install", function (evt) {
 
   self.skipWaiting();
 });
-
 
 self.addEventListener("activate", function (evt) {
   evt.waitUntil(
@@ -41,30 +31,24 @@ self.addEventListener("activate", function (evt) {
   self.clients.claim();
 });
 
-
-self.addEventListener("fetch", function (evt) {
+self.addEventListener("fetch", (evt) => {
   if (evt.request.url.includes("/api/")) {
+    console.log("[Service Worker] Fetch(data)", evt.request.url);
+
     evt.respondWith(
-      caches
-        .open(DATA_CACHE_NAME)
-        .then((cache) => {
-          return fetch(evt.request)
-            .then((response) => {
-           
-              if (response.status === 200) {
-                cache.put(evt.request.url, response.clone());
-              }
-
-              return response;
-            })
-            .catch((err) => {
-           
-              return cache.match(evt.request);
-            });
-        })
-        .catch((err) => console.log(err))
+      caches.open(DATA_CACHE_NAME).then((cache) => {
+        return fetch(evt.request)
+          .then((response) => {
+            if (response.status === 200) {
+              cache.put(evt.request.url, response.clone());
+            }
+            return response;
+          })
+          .catch((err) => {
+            return cache.match(evt.request);
+          });
+      })
     );
-
     return;
   }
 
